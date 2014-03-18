@@ -97,6 +97,12 @@ public class TokenizerTest {
 		@TokenPart("sn")
 		protected String sn = Hardware.getSerialNumber();
 
+        /**
+         * Computer MAC Address
+         */
+        @TokenPart("mac")
+        protected String mac = Hardware.getMacAddress();
+
 		// setters/getters
 	}
 
@@ -115,5 +121,6 @@ public class TokenizerTest {
 		System.out.println("id:     " + checkme.id);
 		System.out.println("secret: " + checkme.secret);
 		System.out.println("sn:     " + checkme.sn);
+        System.out.println("mac:    " + checkme.mac);
 	}
 }

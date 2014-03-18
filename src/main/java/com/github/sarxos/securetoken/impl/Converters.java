@@ -2,10 +2,15 @@ package com.github.sarxos.securetoken.impl;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.github.sarxos.securetoken.Converter;
+import org.codehaus.plexus.component.configurator.converters.composite.MapConverter;
 
 
 public class Converters {
@@ -166,6 +171,25 @@ public class Converters {
 		}
 	}
 
+    private static final class DateConverter implements Converter<Date> {
+
+        private final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        @Override
+        public Date toObject(String string) {
+            try {
+                return formatter.parse(string);
+            } catch (ParseException e) {
+                throw new RuntimeException("Could not parse date: " + string);
+            }
+        }
+
+        @Override
+        public String toString(Date object) {
+            return formatter.format(object);
+        }
+    }
+
 	/**
 	 * Mapping from primitive to boxing type.
 	 */
@@ -211,6 +235,7 @@ public class Converters {
 		register(Void.class, new VoidConverter());
 		register(BigDecimal.class, new BigDecimalConverter());
 		register(BigInteger.class, new BigIntegerConverter());
+        register(Date.class, new DateConverter());
 
 		initialized = true;
 	}
