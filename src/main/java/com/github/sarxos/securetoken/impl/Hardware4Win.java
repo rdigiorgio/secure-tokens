@@ -38,13 +38,7 @@ public class Hardware4Win {
 
 		Scanner sc = new Scanner(is);
 		try {
-			while (sc.hasNext()) {
-				String next = sc.next();
-				if ("BIOSVersion".equals(next)) {
-					sn = sc.next().trim();
-					break;
-				}
-			}
+            sn = convertStreamToString(is);
 		} finally {
 			try {
 				is.close();
@@ -59,4 +53,9 @@ public class Hardware4Win {
 
 		return sn;
 	}
+
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
 }

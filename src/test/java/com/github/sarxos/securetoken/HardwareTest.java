@@ -10,7 +10,8 @@ public class HardwareTest {
 	@Test
 	public void test_getSerialNumber() {
 		String sn = Hardware.getSerialNumber();
-		Assert.assertNotNull(sn);
+        System.out.println("System SN: " + sn);
+        Assert.assertNotNull(sn);
 
 	}
 

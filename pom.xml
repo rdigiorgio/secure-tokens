@@ -14,7 +14,7 @@
 
 	<groupId>com.github.sarxos</groupId>
 	<artifactId>secure-tokens</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<name>secure-tokens</name>
 	<description>
