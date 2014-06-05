@@ -23,7 +23,10 @@ public class Hardware4Nix {
 		Runtime runtime = Runtime.getRuntime();
 		Process process = null;
 		try {
-			process = runtime.exec(new String[] { "dmidecode", "-t", "system" });
+            // hal-get-property --udi '/org/freedesktop/Hal/devices/computer' --key system.hardware.serial
+			//process = runtime.exec(new String[] { "dmidecode", "-t", "system" });
+            process = runtime.exec(new String[] { "hal-get-property", "--udi", "'/org/freedesktop/Hal/devices/computer'",
+                                        "--key", "system.hardware.serial"});
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -39,13 +42,10 @@ public class Hardware4Nix {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String line = null;
-		String marker = "Serial Number:";
 		try {
 			while ((line = br.readLine()) != null) {
-				if (line.indexOf(marker) != -1) {
-					sn = line.split(marker)[1].trim();
-					break;
-				}
+                sn = line;
+                break;
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
