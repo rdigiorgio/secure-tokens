@@ -58,8 +58,7 @@ public class Hardware4Nix {
 		}
 
 		if (sn == null) {
-            sn = "E259BFA98";
-			//throw new RuntimeException("Cannot find computer SN");
+			throw new RuntimeException("Cannot find computer SN");
 		}
 
 		return sn;
